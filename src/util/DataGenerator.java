@@ -25,7 +25,7 @@ public class DataGenerator {
     public static int[] gerarAleatorio(int tamanho) {
         int[] vetor = new int[tamanho];
         for (int i = 0; i < tamanho; i++) {
-            vetor[i] = random.nextInt(tamanho * 10); // valores aleatórios entre 0 e (tamanho*10)
+            vetor[i] = random.nextInt(tamanho * 1000); // valores aleatórios entre 0 e (tamanho*1000)
         }
         return vetor;
     }

@@ -1,6 +1,4 @@
-import sort.BubbleSort;
-import sort.InsertionSort;
-import sort.SelectionSort;
+import sort.*;
 import util.CSVWriter;
 import util.DataGenerator;
 
@@ -12,38 +10,67 @@ public class Main {
     public static void main(String[] args) throws IOException {
         int[] tamanhos = {1000, 10000, 100000};
 
-        CSVWriter csvCrescente = new CSVWriter("resultados/crescente.csv");
-        CSVWriter csvDecrescente = new CSVWriter("resultados/decrescente.csv");
-        CSVWriter csvAleatorio = new CSVWriter("resultados/aleatorio.csv");
+        // CSVs para O(n²)
+        CSVWriter csvOn2Crescente = new CSVWriter("resultados/on2_crescente.csv");
+        CSVWriter csvOn2Decrescente = new CSVWriter("resultados/on2_decrescente.csv");
+        CSVWriter csvOn2Aleatorio = new CSVWriter("resultados/on2_aleatorio.csv");
+
+        // CSVs para O(n log n)
+        CSVWriter csvOnLognCrescente = new CSVWriter("resultados/onlogn_crescente.csv");
+        CSVWriter csvOnLognDecrescente = new CSVWriter("resultados/onlogn_decrescente.csv");
+        CSVWriter csvOnLognAleatorio = new CSVWriter("resultados/onlogn_aleatorio.csv");
 
         for (int tamanho : tamanhos) {
-            // === Vetor Crescente ===
             int[] crescente = DataGenerator.gerarCrescente(tamanho);
-            testarESalvar("Bubble Sort", BubbleSort::ordenar, crescente, tamanho, "Crescente", csvCrescente);
-            testarESalvar("Insertion Sort", InsertionSort::ordenar, crescente, tamanho, "Crescente", csvCrescente);
-            testarESalvar("Selection Sort", SelectionSort::ordenar, crescente, tamanho, "Crescente", csvCrescente);
-            csvCrescente.escreverLinhaEmBranco();
-
-            // === Vetor Decrescente ===
             int[] decrescente = DataGenerator.gerarDecrescente(tamanho);
-            testarESalvar("Bubble Sort", BubbleSort::ordenar, decrescente, tamanho, "Decrescente", csvDecrescente);
-            testarESalvar("Insertion Sort", InsertionSort::ordenar, decrescente, tamanho, "Decrescente", csvDecrescente);
-            testarESalvar("Selection Sort", SelectionSort::ordenar, decrescente, tamanho, "Decrescente", csvDecrescente);
-            csvDecrescente.escreverLinhaEmBranco();
-
-            // === Vetor Aleatório ===
             int[] aleatorio = DataGenerator.gerarAleatorio(tamanho);
-            testarESalvar("Bubble Sort", BubbleSort::ordenar, aleatorio, tamanho, "Aleatório", csvAleatorio);
-            testarESalvar("Insertion Sort", InsertionSort::ordenar, aleatorio, tamanho, "Aleatório", csvAleatorio);
-            testarESalvar("Selection Sort", SelectionSort::ordenar, aleatorio, tamanho, "Aleatório", csvAleatorio);
-            csvAleatorio.escreverLinhaEmBranco();
+
+            // O(n²) - CRESCENTE
+            testarESalvar("Bubble Sort", BubbleSort::ordenar, crescente, tamanho, "Crescente", csvOn2Crescente);
+            testarESalvar("Insertion Sort", InsertionSort::ordenar, crescente, tamanho, "Crescente", csvOn2Crescente);
+            testarESalvar("Selection Sort", SelectionSort::ordenar, crescente, tamanho, "Crescente", csvOn2Crescente);
+            csvOn2Crescente.escreverLinhaEmBranco();
+
+            // O(n²) - DECRESCENTE
+            testarESalvar("Bubble Sort", BubbleSort::ordenar, decrescente, tamanho, "Decrescente", csvOn2Decrescente);
+            testarESalvar("Insertion Sort", InsertionSort::ordenar, decrescente, tamanho, "Decrescente", csvOn2Decrescente);
+            testarESalvar("Selection Sort", SelectionSort::ordenar, decrescente, tamanho, "Decrescente", csvOn2Decrescente);
+            csvOn2Decrescente.escreverLinhaEmBranco();
+
+            // O(n²) - ALEATÓRIO
+            testarESalvar("Bubble Sort", BubbleSort::ordenar, aleatorio, tamanho, "Aleatório", csvOn2Aleatorio);
+            testarESalvar("Insertion Sort", InsertionSort::ordenar, aleatorio, tamanho, "Aleatório", csvOn2Aleatorio);
+            testarESalvar("Selection Sort", SelectionSort::ordenar, aleatorio, tamanho, "Aleatório", csvOn2Aleatorio);
+            csvOn2Aleatorio.escreverLinhaEmBranco();
+
+            // O(n log n) - CRESCENTE
+            testarESalvar("Quick Sort", QuickSort::ordenar, crescente, tamanho, "Crescente", csvOnLognCrescente);
+            testarESalvar("Merge Sort", MergeSort::ordenar, crescente, tamanho, "Crescente", csvOnLognCrescente);
+            testarESalvar("Arrays.sort", ArraysSort::ordenar, crescente, tamanho, "Crescente", csvOnLognCrescente);
+            csvOnLognCrescente.escreverLinhaEmBranco();
+
+            // O(n log n) - DECRESCENTE
+            testarESalvar("Quick Sort", QuickSort::ordenar, decrescente, tamanho, "Decrescente", csvOnLognDecrescente);
+            testarESalvar("Merge Sort", MergeSort::ordenar, decrescente, tamanho, "Decrescente", csvOnLognDecrescente);
+            testarESalvar("Arrays.sort", ArraysSort::ordenar, decrescente, tamanho, "Decrescente", csvOnLognDecrescente);
+            csvOnLognDecrescente.escreverLinhaEmBranco();
+
+            // O(n log n) - ALEATÓRIO
+            testarESalvar("Quick Sort", QuickSort::ordenar, aleatorio, tamanho, "Aleatório", csvOnLognAleatorio);
+            testarESalvar("Merge Sort", MergeSort::ordenar, aleatorio, tamanho, "Aleatório", csvOnLognAleatorio);
+            testarESalvar("Arrays.sort", ArraysSort::ordenar, aleatorio, tamanho, "Aleatório", csvOnLognAleatorio);
+            csvOnLognAleatorio.escreverLinhaEmBranco();
         }
 
-        csvCrescente.fechar();
-        csvDecrescente.fechar();
-        csvAleatorio.fechar();
+        // Fechar arquivos
+        csvOn2Crescente.fechar();
+        csvOn2Decrescente.fechar();
+        csvOn2Aleatorio.fechar();
+        csvOnLognCrescente.fechar();
+        csvOnLognDecrescente.fechar();
+        csvOnLognAleatorio.fechar();
 
-        System.out.println("✅ Dados salvos em arquivos separados por cenário na pasta 'resultados'");
+        System.out.println("✅ Resultados salvos na pasta 'resultados'");
     }
 
     interface AlgoritmoOrdenacao {
@@ -69,6 +96,18 @@ public class Main {
         } else if (resultadoObj instanceof SelectionSort.Resultado res) {
             comparacoes = res.comparacoes;
             trocas = res.trocas;
+            tempo = res.tempoMillis;
+        } else if (resultadoObj instanceof QuickSort.Resultado res) {
+            comparacoes = res.comparacoes;
+            trocas = res.trocas;
+            tempo = res.tempoMillis;
+        } else if (resultadoObj instanceof MergeSort.Resultado res) {
+            comparacoes = res.comparacoes;
+            trocas = res.trocas;
+            tempo = res.tempoMillis;
+        } else if (resultadoObj instanceof ArraysSort.Resultado res) {
+            comparacoes = -1; // Não é possível medir
+            trocas = -1;
             tempo = res.tempoMillis;
         }
 
