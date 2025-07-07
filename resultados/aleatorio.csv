@@ -1,0 +1,13 @@
+Algoritmo,Tamanho,Cenario,Tempo (ms),Comparacoes,Trocas
+Bubble Sort,1000,Aleatório,22,499122,249040
+Insertion Sort,1000,Aleatório,10,250032,249040
+Selection Sort,1000,Aleatório,2,499500,993
+
+Bubble Sort,10000,Aleatório,185,49984560,24894730
+Insertion Sort,10000,Aleatório,28,24904718,24894730
+Selection Sort,10000,Aleatório,115,49995000,9992
+
+Bubble Sort,100000,Aleatório,17099,4999848975,2481333471
+Insertion Sort,100000,Aleatório,2073,2481433462,2481333471
+Selection Sort,100000,Aleatório,9758,4999950000,99992
+

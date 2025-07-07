@@ -1,0 +1,13 @@
+Algoritmo,Tamanho,Cenario,Tempo (ms),Comparacoes,Trocas
+Bubble Sort,1000,Decrescente,6,499500,499500
+Insertion Sort,1000,Decrescente,5,499500,499500
+Selection Sort,1000,Decrescente,15,499500,500
+
+Bubble Sort,10000,Decrescente,166,49995000,49995000
+Insertion Sort,10000,Decrescente,55,49995000,49995000
+Selection Sort,10000,Decrescente,117,49995000,5000
+
+Bubble Sort,100000,Decrescente,8096,4999950000,4999950000
+Insertion Sort,100000,Decrescente,5273,4999950000,4999950000
+Selection Sort,100000,Decrescente,10575,4999950000,50000
+
